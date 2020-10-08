@@ -1,6 +1,8 @@
 require "httparty"
 require "dotenv"
 require "awesome_print"
+require_relative "user.rb"
+require_relative "channel.rb"
 
 Dotenv.load
 
@@ -19,31 +21,33 @@ class Workspace
   def get_users
     user_response = HTTParty.get(GET_USER_PATH, query: { token: ENV["SLACK_TOKEN"] })
 
-    list_users = user_response["members"].map do |member|
-      {
-        :username => member["name"],
-        :name => member["real_name"],
-        :id => member["id"],
-
-      }
+    @users = user_response["members"].map do |member|
+      # {
+      #   :username => member["name"],
+      #   :name => member["real_name"],
+      #   :id => member["id"],
+      #
+      # }
+      User.new(member["name"], member["real_name"], member["id"])
     end
 
-    return list_users
+    return @users
   end
 
   def get_channels
     channel_response = HTTParty.get(GET_CHANNEL_PATH, query: { token: ENV["SLACK_TOKEN"] })
 
-    list_channels = channel_response["channels"].map do |channel|
-      {
-          :name => channel["name"],
-          :topic => channel["topic"]["value"],
-          :member_count => channel["num_members"],
-          :slack_id => channel["id"]
-      }
+    @channels = channel_response["channels"].map do |channel|
+      # {
+      #     :name => channel["name"],
+      #     :topic => channel["topic"]["value"],
+      #     :member_count => channel["num_members"],
+      #     :slack_id => channel["id"]
+      # }
+      Channel.new(channel["name"], channel["topic"]["value"], channel["num_members"], channel["id"])
     end
 
-    return list_channels
+    return @channels
   end
 end
 
