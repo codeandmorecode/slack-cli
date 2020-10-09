@@ -1,4 +1,3 @@
-
 class User #< Recipient
   attr_reader :username, :name, :id
 
@@ -8,4 +7,7 @@ class User #< Recipient
     @id = id
   end
 
+  def details
+    return "Username: #{@username}. Name: #{@name}. ID: #{@id}."
+  end
 end

@@ -28,13 +28,26 @@ class Workspace
     return @users
   end
 
+  def select_user(user_or_id)
+    selected_user = self.get_users
+      .select { |user| user.name == user_or_id || user.id == user_or_id }
+      .first
+    return selected_user
+  end
+
   def get_channels
     channel_response = HTTParty.get(GET_CHANNEL_PATH, query: { token: ENV["SLACK_TOKEN"] })
 
     @channels = channel_response["channels"].map do |channel|
       Channel.new(channel["name"], channel["topic"]["value"], channel["num_members"], channel["id"])
     end
-
     return @channels
+  end
+
+  def select_channel(name_or_id)
+    selected_channel = self.get_channels
+      .select { |channel| channel.name == name_or_id || channel.id == name_or_id }
+      .first
+    return selected_channel
   end
 end

@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require_relative "workspace"
+require_relative "channel"
 require "dotenv"
 require "httparty"
 require "awesome_print"
@@ -16,38 +17,42 @@ def main
   total_channels = workspace.get_channels.length
   puts "There are #{total_users} users in the Ada Slack workspace and #{total_channels} channels in the Ada Slack workspace."
 
+  selected_user = nil
+  selected_channel = nil
+
   until command == "quit" || command == "q"
     print "What do you want to do? Here are the options: list users, list channels, select user, select channel, details, or quit => "
     command = gets.chomp.downcase
     if command == "list users"
-      #ap workspace.get_users
       tp workspace.get_users, :username, :name, :id
     elsif command == "list channels"
-      #ap workspace.get_channels
-      tp workspace.get_channels, :name, :topic, :member_count, :slack_id
+      tp workspace.get_channels, :name, :topic, :member_count, :id
     elsif command == "select user"
-      puts "Do you want to input a username or a slack ID?"
-
-      answer = gets.chomp.downcase
-
-      until answer == "quit"
-
-        if answer == "username"
-          puts "calling username method" #workspace.select_username
-          answer = "quit"
-        elsif answer == "slack id"
-          puts "calling slack id method" # workspace.select_slack_id
-          answer = "quit"
-        else
-          "#{answer} is not a valid option. Enter username, slack id, or quit."
-        end
-
+      print "Enter username or slack ID => "
+      user_or_id = gets.chomp
+      # returns User object
+      selected_user = workspace.select_user(user_or_id)
+      # validate username or ID exists
+      if selected_user == nil
+        puts "Username or ID not found"
       end
-
     elsif command == "select channel"
-      # workspace.select_channel
+      print "Enter channel name or ID => "
+      name_or_id = gets.chomp
+      selected_channel = workspace.select_channel(name_or_id)
+      # validate channel name or ID exists
+      if selected_channel == nil
+        puts "Channel name or ID not found"
+      end
     elsif command == "details"
-      # workspace.details
+      # validate user or channel is selected first before providing details 
+      if selected_user == nil && selected_channel == nil
+        puts "Select a user or channel first"
+      elsif selected_user != nil
+        puts selected_user.details
+      elsif selected_channel != nil
+        puts selected_channel.details
+      end
     else
       puts "That is not a valid command. Please provide a command from the provided list."
     end
