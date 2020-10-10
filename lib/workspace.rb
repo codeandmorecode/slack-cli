@@ -10,6 +10,9 @@ GET_USER_PATH = "https://slack.com/api/users.list"
 
 GET_CHANNEL_PATH = "https://slack.com/api/conversations.list"
 
+GET_MESSAGE_PATH = "https://slack.com/api/chat.postMessage"
+
+
 class Workspace
   attr_reader :users, :channels
 
@@ -50,4 +53,15 @@ class Workspace
       .first
     return selected_channel
   end
+
+
+  def send_message(channel, message)
+    user_response = HTTParty.post(GET_MESSAGE_PATH, body: { 
+      token: ENV["SLACK_TOKEN"], 
+      channel: channel,
+      text: message
+      })
+
+  end 
+
 end
