@@ -25,7 +25,7 @@ describe "Workspace" do
   end
 
   it "select user" do
-    input = "Alice D"
+    input = "madelign"
     VCR.use_cassette("workspace") do
       response = @workspace.select_user(input)
       expect(response).wont_be_nil
@@ -50,11 +50,12 @@ describe "Workspace" do
     end
   end
 
-  it "doesn't raise exception when message is sent" do
+  it "returns \"Message sent!\" when message is sent" do
     VCR.use_cassette("workspace") do
-      recipient_name = "Alice D"
+      recipient_name = "madelign"
       message = "Testers testing tests!"
-      expect(@workspace.send_message(recipient_name, message)).wont_raise ArgumentError
+      message_status = puts "Message sent!" 
+      expect(@workspace.send_message(recipient_name, message)).must_be_same_as message_status
     end
   end
 end

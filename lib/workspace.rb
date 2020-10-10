@@ -37,7 +37,7 @@ class Workspace
 
   def select_user(username_or_id)
     selected_user = self.get_users
-      .select { |user| user.name == username_or_id || user.id == username_or_id }
+      .select { |user| user.username == username_or_id || user.id == username_or_id }
       .first
     return selected_user
   end
@@ -70,8 +70,12 @@ class Workspace
       text: message,
     })
 
-    if response["ok"] == false
-      raise ArgumentError
+    if response["ok"] == true
+      message_status = puts "Message sent!"
+    else 
+      message_status = puts "Messaged failed to send :'("
     end
+
+    return message_status
   end
 end
