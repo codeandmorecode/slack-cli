@@ -1,4 +1,4 @@
-class User #< Recipient
+class User 
   attr_reader :username, :name, :id
 
   def initialize(username, name, id)

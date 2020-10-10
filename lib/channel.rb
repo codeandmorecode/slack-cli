@@ -1,4 +1,4 @@
-class Channel #< Recipient
+class Channel 
   attr_reader :name, :topic, :member_count, :id
 
   def initialize(name, topic, member_count, id)

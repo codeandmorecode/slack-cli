@@ -16,7 +16,7 @@ def main
   total_channels = workspace.get_channels.length
   puts "There are #{total_users} users in the Ada Slack workspace and #{total_channels} channels in the Ada Slack workspace."
 
- selected_recipient = nil  
+  selected_recipient = nil
 
   until command == "quit" || command == "q"
     print "What do you want to do? Here are the options: \n 
@@ -34,10 +34,10 @@ def main
       tp workspace.get_channels, :name, :topic, :member_count, :id
     elsif command == "select user"
       print "Enter username or slack ID => "
-      user_or_id = gets.chomp
+      username_or_id = gets.chomp
       # returns User object
-      selected_recipient = workspace.select_user(user_or_id)
-     # validate username or ID exists
+      selected_recipient = workspace.select_user(username_or_id)
+      # validate username or ID exists
       if selected_recipient == nil
         puts "Username or ID not found"
       end
@@ -64,12 +64,12 @@ def main
         message = gets.chomp
         workspace.send_message(selected_recipient.id, message)
       end
+    elsif command == "quit" || command == "q"
+      puts "Thank you for using the ADA Slack CLI"
     else
       puts "That is not a valid command. Please provide a command from the provided list."
     end
   end
-
-  puts "Thank you for using the ADA Slack CLI"
 end
 
 main if __FILE__ == $PROGRAM_NAME

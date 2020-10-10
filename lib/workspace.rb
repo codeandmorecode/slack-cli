@@ -28,20 +28,18 @@ class Workspace
       User.new(member["name"], member["real_name"], member["id"])
     end
 
+    unless user_response.code == 200
+      raise SlackApiError, "Error: #{user_response.parsed_response["error"]}"
+    end
+
     return @users
-
-    # unless user_response.code == 200 && user_response.parsed_response["ok"]
-    #   raise SlackApiError, "Error: #{user_response.parsed_response["error"]}"
-    # end
-
   end
 
-  def select_user(user_or_id)
+  def select_user(username_or_id)
     selected_user = self.get_users
-      .select { |user| user.name == user_or_id || user.id == user_or_id }
+      .select { |user| user.name == username_or_id || user.id == username_or_id }
       .first
     return selected_user
-
   end
 
   def get_channels
@@ -50,31 +48,30 @@ class Workspace
     @channels = channel_response["channels"].map do |channel|
       Channel.new(channel["name"], channel["topic"]["value"], channel["num_members"], channel["id"])
     end
-    return @channels
 
-    # unless channel_response.code == 200 && channel_response.parsed_response["ok"]
-    #   raise SlackApiError, "Error: #{channel_response.parsed_response["error"]}"
-    # end
+    unless channel_response.code == 200
+      raise SlackApiError, "Error: #{channel_response.parsed_response["error"]}"
+    end
+
+    return @channels
   end
 
   def select_channel(name_or_id)
-
     selected_channel = self.get_channels
       .select { |channel| channel.name == name_or_id || channel.id == name_or_id }
       .first
     return selected_channel
-
   end
 
   def send_message(recipient_name, message)
-    command = HTTParty.post(GET_MESSAGE_PATH, body: {
+    response = HTTParty.post(GET_MESSAGE_PATH, body: {
       token: ENV["SLACK_TOKEN"],
       channel: recipient_name,
-      text: message
-      })
-    # unless command.parsed_response["ok"] == "true"
-    #   raise SlackApiError
-    # end
-  end
+      text: message,
+    })
 
+    if response["ok"] == false
+      raise ArgumentError
+    end
+  end
 end
