@@ -3,7 +3,6 @@ require "dotenv"
 require "awesome_print"
 require_relative "user.rb"
 require_relative "channel.rb"
-
 Dotenv.load
 
 GET_USER_PATH = "https://slack.com/api/users.list"
@@ -11,6 +10,8 @@ GET_USER_PATH = "https://slack.com/api/users.list"
 GET_CHANNEL_PATH = "https://slack.com/api/conversations.list"
 
 GET_MESSAGE_PATH = "https://slack.com/api/chat.postMessage"
+
+class SlackApiError < StandardError; end
 
 
 class Workspace
@@ -57,10 +58,15 @@ class Workspace
 
   def send_message(recipient_name, message)
     user_response = HTTParty.post(GET_MESSAGE_PATH, body: { 
-      token: ENV["SLACK_TOKEN"], 
+      token: ENV["SLACK_TOKEN"],
       channel: recipient_name,
       text: message
       })
+
+    unless user_response.code == 200 && user_response.parsed_response["ok"]
+      raise SlackApiError, "Error: #{user_response.parsed_response["error"]}"
+    end
+
   end
 
 end
