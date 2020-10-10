@@ -55,13 +55,12 @@ class Workspace
   end
 
 
-  def send_message(channel, message)
+  def send_message(recipient_name, message)
     user_response = HTTParty.post(GET_MESSAGE_PATH, body: { 
       token: ENV["SLACK_TOKEN"], 
-      channel: channel,
+      channel: recipient_name,
       text: message
       })
-
-  end 
+  end
 
 end

@@ -63,15 +63,13 @@ def main
         puts selected_channel.details
       end
     elsif command == "send message"
-      # if channel == nil
-      #   puts "You must select a recipient (channel or user) you would like to message."
-      # else 
-      #   print "Type your message => "
-      #   message = gets.chomp
-        channel =  "test-channel2"
-        message = "heyyyyyyyyyyyyyyyyyyyyy"
-        workspace.send_message(channel, message)
-      # end
+      if selected_channel == nil
+        puts "You must select a recipient (channel or user) you would like to message."
+      else
+        print "Type your message => "
+        message = gets.chomp
+        workspace.send_message(selected_channel.name, message)
+      end
     else
       puts "That is not a valid command. Please provide a command from the provided list."
     end
