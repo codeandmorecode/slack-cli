@@ -45,7 +45,6 @@ def main
       print "Enter channel name or ID => "
       name_or_id = gets.chomp
       selected_recipient = workspace.select_channel(name_or_id)
-      #recipient = selected_recipient.name
       # validate channel name or ID exists
       if selected_recipient == nil
         puts "Channel name or ID not found"

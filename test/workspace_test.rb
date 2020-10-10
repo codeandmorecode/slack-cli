@@ -12,11 +12,7 @@ describe "Workspace" do
       response = @workspace.get_users
       expect(response).wont_be_nil
       expect(response).must_be_kind_of Array
-      # expect(response.length).must_equal 162
       expect(response[1]).must_be_instance_of User
-      # expect(response[137].name).must_equal "Alice D"
-      # expect(response[129].username).must_equal "fire_madeline_api_pro"
-      # expect(response[0].id).must_equal "USLACKBOT"
     end
   end
 
@@ -25,11 +21,25 @@ describe "Workspace" do
       response = @workspace.get_channels
       expect(response).wont_be_nil
       expect(response).must_be_kind_of Array
-      #expect(response.length).must_equal 48
       expect(response[1]).must_be_instance_of Channel
-      # expect(response[39].name).must_equal "plants"
-      # expect(response[32].slack_id).must_equal "C01AHJVCA3T"
-      # expect(response[25].member_count).must_equal 66
+    end
+  end
+
+  it "select channel" do
+    input = "test-channel2"
+    VCR.use_cassette("workspace") do
+      response = @workspace.select_channel(input)
+      expect(response).wont_be_nil
+      expect(response).must_be_instance_of Channel
+    end
+  end
+
+  it "select user" do
+    input = "Alice D"
+    VCR.use_cassette("workspace") do
+      response = @workspace.select_user(input)
+      expect(response).wont_be_nil
+      expect(response).must_be_instance_of User
     end
   end
 
@@ -42,6 +52,7 @@ describe "Workspace" do
   #     expect(answer).must_equal "test message"
   #   end
   # end
+  # delete if don't use template for other tests
   # it "returns false if channel does not exist" do
   #   VCR.use cassette("negative-edge") do
   #     expect {
