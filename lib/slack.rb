@@ -62,7 +62,12 @@ def main
       else
         print "Type your message => "
         message = gets.chomp
-        workspace.send_message(selected_recipient.id, message)
+        did_message_send = workspace.send_message(selected_recipient.id, message)
+        if did_message_send
+          puts "Message sent!"
+        else
+          puts "Message failed to send."
+        end
       end
     elsif command == "quit" || command == "q"
       puts "Thank you for using the ADA Slack CLI"

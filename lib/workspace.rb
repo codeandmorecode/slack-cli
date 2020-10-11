@@ -63,19 +63,13 @@ class Workspace
     return selected_channel
   end
 
-  def send_message(recipient_name, message)
+  def send_message(recipient_id, message)
     response = HTTParty.post(GET_MESSAGE_PATH, body: {
       token: ENV["SLACK_TOKEN"],
-      channel: recipient_name,
+      channel: recipient_id,
       text: message,
     })
 
-    if response["ok"] == true
-      message_status = puts "Message sent!"
-    else 
-      message_status = puts "Messaged failed to send :'("
-    end
-
-    return message_status
+    return response["ok"]
   end
 end

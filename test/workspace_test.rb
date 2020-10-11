@@ -52,10 +52,9 @@ describe "Workspace" do
 
   it "returns \"Message sent!\" when message is sent" do
     VCR.use_cassette("workspace") do
-      recipient_name = "madelign"
-      message = "Testers testing tests!"
-      message_status = puts "Message sent!" 
-      expect(@workspace.send_message(recipient_name, message)).must_be_same_as message_status
+      recipient_id = "U017S7BPX7G"
+      message = "Testers testing tests!!"
+      expect(@workspace.send_message(recipient_id, message)).must_be_same_as true
     end
   end
 end

@@ -739,4 +739,134 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"ok":false,"error":"channel_not_found"}'
   recorded_at: Sat, 10 Oct 2020 07:18:34 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<HIDDEN_STUFF>&channel=U017S7BPX7G&text=Testers%20testing%20tests%21
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 11 Oct 2020 00:57:39 GMT
+      Server:
+      - Apache
+      X-Slack-Req-Id:
+      - bf805c86a41bcf83548482e9b66f4b93
+      X-Oauth-Scopes:
+      - identify,channels:read,groups:read,im:read,mpim:read,users:read,chat:write
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Slack-Backend:
+      - r
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Content-Length:
+      - '348'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Via:
+      - haproxy-www-b10g,haproxy-edge-pdx-d6lr
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"channel":"D017YUU7DRQ","ts":"1602377859.000500","message":{"bot_id":"B01C3SF39EW","type":"message","text":"Testers
+        testing tests!","user":"U017S7BPX7G","ts":"1602377859.000500","team":"T016J51T03T","bot_profile":{"id":"B01C3SF39EW","deleted":false,"name":"Fire
+        - Madeline - API Project","updated":1602052542,"app_id":"A01BP1HMY3H","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T016J51T03T"}}}'
+  recorded_at: Sun, 11 Oct 2020 00:57:39 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<HIDDEN_STUFF>&channel=U017S7BPX7G&text=Testers%20testing%20tests%21%21
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 11 Oct 2020 01:05:53 GMT
+      Server:
+      - Apache
+      X-Slack-Req-Id:
+      - cc3f79af5be8c36c5415f6b8aa558c94
+      X-Oauth-Scopes:
+      - identify,channels:read,groups:read,im:read,mpim:read,users:read,chat:write
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Slack-Backend:
+      - r
+      X-Content-Type-Options:
+      - nosniff
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Content-Length:
+      - '350'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Via:
+      - haproxy-www-uz5t,haproxy-edge-pdx-rqgu
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"channel":"D017YUU7DRQ","ts":"1602378353.000600","message":{"bot_id":"B01C3SF39EW","type":"message","text":"Testers
+        testing tests!!","user":"U017S7BPX7G","ts":"1602378353.000600","team":"T016J51T03T","bot_profile":{"id":"B01C3SF39EW","deleted":false,"name":"Fire
+        - Madeline - API Project","updated":1602052542,"app_id":"A01BP1HMY3H","icons":{"image_36":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_36.png","image_48":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/bot_48.png","image_72":"https:\/\/a.slack-edge.com\/80588\/img\/plugins\/app\/service_72.png"},"team_id":"T016J51T03T"}}}'
+  recorded_at: Sun, 11 Oct 2020 01:05:54 GMT
 recorded_with: VCR 6.0.0
